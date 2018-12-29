@@ -1,7 +1,7 @@
 from vpython import *
 
 
-def room(height, width, length):
+def room(height, width, length, color):
     # Making a room
     thickness = height / 1000
 
@@ -16,11 +16,11 @@ def room(height, width, length):
     z = length / 2
 
     # create the walls
-    left_wall = box(pos=vector(-x,0,0), size=size_wall, color=color.white)
-    right_wall = box(pos=vector(x,0,0), size=size_wall, color=color.white)
-    top = box(pos=vector(0,y,0), size=size_floor, color=color.white)
-    floor = box(pos=vector(0,-y,0), size=size_floor, color=color.white)
-    back_wall = square = box(pos=vector(0,0,-z), size=size_back, color=color.white)
+    left_wall = box(pos=vector(-x,0,0), size=size_wall, color=color)
+    right_wall = box(pos=vector(x,0,0), size=size_wall, color=color)
+    top = box(pos=vector(0,y,0), size=size_floor, color=color)
+    floor = box(pos=vector(0,-y,0), size=size_floor, color=color)
+    back_wall = square = box(pos=vector(0,0,-z), size=size_back, color=color)
 
 
-room(10, 10, 10)
+room(10, 10, 10, color.white)
