@@ -1,6 +1,6 @@
 from vpython import *
 import math
-import Light, room, constants, circular_motion, select_orbit
+import room, constants, circular_motion, select_orbit
 
 
 def rydberg_equation(nf, ni):
@@ -89,8 +89,11 @@ t = 1
 prev_orbit = 1
 orbit = 1
 counter = 0
-# Initiate the while loop
 
+# create an invisible local light at the origin to be used later when the electron emitts a pho
+lamp = local_light(pos=vector(0, 0, 0), color=color.black)
+
+# Initiate the while loop
 while True:
     # set a rate
     rate(the_rate)
@@ -100,6 +103,7 @@ while True:
     if counter == 2:
         prev_orbit = orbit
         counter = 0
+
     # The electron orbits depending on which radio button is checked
     # to find velocity, we use (1 / 8 * pi * epsilon) * (e^2 / r) = 1/2 * electron_mass * v^2
     if select_orbit.first_button.checked:
@@ -141,7 +145,7 @@ while True:
     if prev_orbit != orbit:
         wavelength = rydberg_equation(orbit, prev_orbit) * (10 ** 9)
         emitted_light = color.black
-        if 700 >= wavelength >= 635:
+        if 800 >= wavelength >= 635:
             emitted_light = color.red
         elif 634 >= wavelength >= 590:
             emitted_light = color.orange
@@ -153,7 +157,12 @@ while True:
             emitted_light = color.cyan
         elif 489 >= wavelength >= 450:
             emitted_light = color.blue
-        elif 449 >= wavelength >= 400:
+        elif 449 >= wavelength >= 300:
             emitted_light = color.purple
 
-        Light.light(vector(0, 0, 0), emitted_light, .5)
+        # make light visible with light at the electron position
+        lamp.pos=electron.pos
+        lamp.color=emitted_light
+    
+
+
