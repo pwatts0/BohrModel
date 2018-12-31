@@ -1,6 +1,6 @@
 from vpython import *
-import math
-import room, constants, circular_motion, select_orbit
+import math, constants
+from functions import room, circular_motion, select_orbit
 
 
 def rydberg_equation(nf, ni):
